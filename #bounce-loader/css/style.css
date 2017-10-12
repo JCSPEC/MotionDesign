@@ -1,0 +1,65 @@
+body { background: #323436; }
+
+.bounce {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 40px; height: 40px;
+  margin-top: 80px;
+  background: transparent; border-radius: 50%;
+  -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%); }
+
+.bounce:before {
+  content: '';
+  position: absolute; z-index: 10;
+  width: 100%; height: 100%;
+  background: #ff5454; border-radius: 50%;
+  box-shadow: inset 0 -10px rgba(0,0,0,0.1);
+  -webkit-animation: bounce 0.75s infinite linear;
+          animation: bounce 0.75s infinite linear; }
+
+.bounce:after {
+  content: '';
+  position: absolute;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.1); border-radius: 50%;
+  -webkit-transform: scale(1,0.25);
+          transform: scale(1,0.25);
+  -webkit-animation: bounceshadow 0.75s infinite linear;
+          animation: bounceshadow 0.75s infinite linear; }
+
+@-webkit-keyframes bounce {
+  0% { -webkit-transform: translate(0,-50%) scale(1,0.8); transform: translate(0,-50%) scale(1,0.8); }
+  30% { -webkit-transform: translate(0,-250%) scale(0.8,1); transform: translate(0,-250%) scale(0.8,1); }
+  60% { -webkit-transform: translate(0,-300%) scale(0.8,1); transform: translate(0,-300%) scale(0.8,1); }
+  85% { -webkit-transform: translate(0,-50%) scale(0.8,1); transform: translate(0,-50%) scale(0.8,1); }
+  88% { -webkit-transform: translate(0,-50%) scale(0.8,1); transform: translate(0,-50%) scale(0.8,1); }
+  95%, 100% { -webkit-transform: translate(0,-50%) scale(1,0.8); transform: translate(0,-50%) scale(1,0.8); }
+}
+
+@keyframes bounce {
+  0% { -webkit-transform: translate(0,-50%) scale(1,0.8); transform: translate(0,-50%) scale(1,0.8); }
+  30% { -webkit-transform: translate(0,-250%) scale(0.8,1); transform: translate(0,-250%) scale(0.8,1); }
+  60% { -webkit-transform: translate(0,-300%) scale(0.8,1); transform: translate(0,-300%) scale(0.8,1); }
+  85% { -webkit-transform: translate(0,-50%) scale(0.8,1); transform: translate(0,-50%) scale(0.8,1); }
+  88% { -webkit-transform: translate(0,-50%) scale(0.8,1); transform: translate(0,-50%) scale(0.8,1); }
+  95%, 100% { -webkit-transform: translate(0,-50%) scale(1,0.8); transform: translate(0,-50%) scale(1,0.8); }
+}
+
+@-webkit-keyframes bounceshadow {
+  0% { -webkit-transform: scale(1,0.25); transform: scale(1,0.25) }
+  30% { -webkit-transform: scale(1.5,0.25); transform: scale(1.5,0.25) }
+  60% { -webkit-transform: scale(2,0.25); transform: scale(2,0.25) }
+  85% { -webkit-transform: scale(1,0.25); transform: scale(1,0.25) }
+  90% { -webkit-transform: scale(1,0.25); transform: scale(1,0.25) }
+  100% { -webkit-transform: scale(1,0.25); transform: scale(1,0.25) }
+}
+
+@keyframes bounceshadow {
+  0% { -webkit-transform: scale(1,0.25); transform: scale(1,0.25) }
+  30% { -webkit-transform: scale(1.5,0.25); transform: scale(1.5,0.25) }
+  60% { -webkit-transform: scale(2,0.25); transform: scale(2,0.25) }
+  85% { -webkit-transform: scale(1,0.25); transform: scale(1,0.25) }
+  90% { -webkit-transform: scale(1,0.25); transform: scale(1,0.25) }
+  100% { -webkit-transform: scale(1,0.25); transform: scale(1,0.25) }
+}

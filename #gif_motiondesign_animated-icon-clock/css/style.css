@@ -1,0 +1,89 @@
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16em;
+  height: 16em;
+  -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+
+/* Calendar */
+
+.clock { color: #12395F; }
+
+.clock:before,
+.clock:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 0.75em;
+  height: 0.75em;
+  -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+  background-color: currentColor;
+  border-radius: 50%;
+}
+
+.clock:before {
+  background-color: #F78D72;
+  width: 0.125em;
+  height: 2.3125em;
+  -webkit-transform: translate(-50%,-100%);
+          transform: translate(-50%,-100%);
+  -webkit-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+  border-radius: 0.0625em;
+  -webkit-animation: rotate 3.5s infinite linear;
+          animation: rotate 3.5s infinite linear;
+}
+
+.clock i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 7.25em;
+  height: 7.25em;
+  -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+  border: 0.25em solid;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 0.6875em #CDE9E0,
+    inset 0 0 0 0.8125em;
+}
+
+.clock i:before,
+.clock i:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 1.4375em;
+  height: 0.25em;
+  -webkit-transform: translate(0,-50%);
+          transform: translate(0,-50%);
+  background-color: currentColor;
+  border-radius: 0.125em;
+}
+
+.clock i:after {
+  width: 0.25em;
+  height: 2.375em;
+  -webkit-transform: translate(-50%,-100%);
+          transform: translate(-50%,-100%);
+}
+
+@-webkit-keyframes rotate {
+  0% { -webkit-transform: translate(-50%,-100%) rotate(0); transform: translate(-50%,-100%) rotate(0); }
+  100% { -webkit-transform: translate(-50%,-100%) rotate(360deg); transform: translate(-50%,-100%) rotate(360deg); }
+}
+
+@keyframes rotate {
+  0% { -webkit-transform: translate(-50%,-100%) rotate(0); transform: translate(-50%,-100%) rotate(0); }
+  100% { -webkit-transform: translate(-50%,-100%) rotate(360deg); transform: translate(-50%,-100%) rotate(360deg); }
+}

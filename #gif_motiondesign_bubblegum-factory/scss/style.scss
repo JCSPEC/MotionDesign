@@ -1,0 +1,517 @@
+$main: hsl(180,10%,76%);
+$back: linear-gradient(0deg, hsla(250,50%,10%,0.5) 0%, hsla(200,50%,10%,0.7) 50%, hsla(20,10%,10%,0.5) 50%, hsla(180,50%,80%,0.5) 100%);
+$fruit: hsl(90,60%,80%);
+$after: hsl(0,60%,80%);
+
+$sans: 'Open Sans', sans-serif;
+$base: 2.6vh;
+$width: $base*15;
+$height: $base*20;
+$depth: $base*5;
+$angle: 60deg;
+$inverse: 30deg;
+$scale: 0.435;
+$scaleX: 0.575;
+
+$ease-in: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+$ease-out: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+$time: 5s;
+
+@mixin center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%,-50%,0);
+}
+
+body{
+  background: $back;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.wrap{
+  height: 100vh;
+  width: 100vw;
+  transform: translateY(#{$base*5});
+}
+.rays{
+  opacity: 0.3;
+  mix-blend-mode: color-dodge;
+  @keyframes bathe{
+    0%{
+      opacity: 0;
+    }
+    33%{
+      opacity: 0;
+    }
+    40%{
+      opacity: 0.6;
+    }
+    60%{
+      opacity: 0.3;
+    }
+    66%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 0;
+    }  
+  }
+  animation: bathe $time infinite linear;
+}
+
+.ray-left, .ray-right{
+  @include center;
+    
+  &:before{
+    content: '';
+    position: absolute;
+    width: $base*6.02;
+    height: $base*10;
+    background: $after;
+    transform: skewX(10deg) translate3d(0%, -88%, 0);
+    transform-origin: 50% 100%;
+  }
+  &:after{
+    content: '';
+    position: absolute;
+    width: $width*0.6;
+    height: $width*0.6;
+    background: $after;
+    border-radius: $base*10;
+    transform: scaleY($scale) translate3d(-50%,-80%,0);
+  }
+}
+.ray-right{
+  &:before{
+    transform: skewX(-10deg) translate3d(-100%, -88%, 0);
+  }
+  &:after{
+    display: none;
+  }
+}
+.light-mask{
+  @include center;
+  top: calc(50% - #{$height*0.85 + $base*0.8});
+  width:  $base*5.5;
+  height: $base*15;
+  background: transparent;
+  transform: translatey(-$base*8.5) translatex(-50%) scaleY(0.5);
+  border-radius: $base*100;
+  overflow: hidden;
+}
+
+.light-inner{
+  @include center;
+  width:  $base*2;
+  height: $base*2;
+  border-radius: $base*2;
+  background: white;
+  opacity: 1;
+  transform-origin: 50% 50%;
+  @keyframes radiate{
+    0%{
+      opacity: 0.3;
+      filter: blur($base*1);
+      transform: scaleY(1.5) translate3d(-50%,-0%,0); 
+      animation-timing-function: linear;
+    }
+    16%{
+      opacity: 0.4;
+      filter: blur(0);
+      transform: scaleY(2) translate3d(-50%,0%,0);
+      animation-timing-function: linear;
+    }
+    20%{
+      opacity: 0.4;
+      filter: blur(0);
+      transform: scaleY(1.8) translate3d(-50%,20%,0);
+      animation-timing-function: linear;
+    }
+    23%{
+      opacity: 0.4;
+      filter: blur(0);
+      transform: scaleY(2.6) translate3d(-50%,-30%,0);
+      animation-timing-function: linear;
+    }
+    24%{
+      opacity: 0.3;
+      filter: blur(0);
+      transform: scaleY(3) translate3d(-50%,-50%,0);
+      animation-timing-function: $ease-in;
+    }
+    28%{
+      opacity: 0.2;
+      filter: blur(0);
+      transform: scaleY(10) translate3d(-50%,150%,0);
+      
+    }
+    30%{
+      opacity: 0;
+      transform: scaleY(10) translate3d(-50%,150%,0);
+    }
+    35%{
+      opacity: 0;
+      filter: blur($base*3);
+      transform: scaleY(0) translate3d(-50%,-0%,0);
+      animation-timing-function: $ease-out;
+    }
+    100%{
+      opacity: 0.3;
+      filter: blur($base*1);
+      transform: scaleY(1.5) translate3d(-50%,-0%,0); 
+    }  
+  }
+  animation: radiate $time infinite linear;
+}
+
+.light-cover{
+  @include center;
+  top: calc(50% - #{$height*0.85 + $base*0.8});
+  width:  $base*5.5;
+  height: $base*5;
+  background: darken($after, 10%);
+  transform: translatey(-$base*3.5) translatex(-50%);
+  opacity: 0.2;
+    
+  &:after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: darken($after, 0%);
+    border-radius: $base*10;
+    transform: translatey(#{-$base*2.5}) scaleY($scale);
+  }
+  &:before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: $base*5;
+    background: darken($after,20%);
+    border-radius: $base*10;
+    transform: scaleY($scale) translatey(#{$base*5.5});
+  }
+}
+
+.light-base{
+  @include center;
+  top: calc(50% - #{$height*0.85});
+  width: $base*7;
+  height: $base*7;
+  background: linear-gradient(90deg, lighten($main, 10%), darken($main, 10%));
+  border-radius: $base*10;
+  transform: scaleY($scale) translatex(-50%) translateY(-50%);
+  &:after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: lighten($main, 30%);
+    border-radius: $base*10;
+    transform: translatey(#{-$base*3})
+  }
+  &:before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 45%;
+    background: linear-gradient(90deg, lighten($main, 10%), darken($main, 10%));
+    transform: translatey(5%)
+  }
+}
+
+.window{
+  @include center;
+  width: $width;
+  height: $height;
+  background: linear-gradient(-35deg, hsla(210,70%,60%,0.8), hsla(180,70%,70%,0.6));
+  mix-blend-mode: soft-light;
+  @keyframes fry{
+    0%{mix-blend-mode: soft-light;}
+    50%{mix-blend-mode: soft-light;}
+    51%{ mix-blend-mode: luminocity;}
+    52%{ mix-blend-mode: difference;}
+    53%{mix-blend-mode: color-dodge;}
+    54%{mix-blend-mode: hue;}
+    55%{ mix-blend-mode: exclusion;}
+    56%{ mix-blend-mode: luminocity;}
+    57%{ mix-blend-mode: saturation;}
+    58%{ mix-blend-mode: difference;}
+    59%{mix-blend-mode: color-dodge;}
+    60%{mix-blend-mode: soft-light;}
+    100%{mix-blend-mode: soft-light;}
+  }
+  animation: fry $time infinite;
+}
+
+.machine-front{
+  @include center;
+  box-sizing: border-box;
+  border: $base*2 solid $main;
+  border-top: $base*4 solid $main;
+  border-bottom: $base*6 solid $main;
+  width: $width;
+  height: $height;
+  &:before, &:after{
+    content: '';
+    position: absolute;
+    display: block;
+    width: $depth*1/5;
+    height: $height;
+    top: -4*$base;
+  }
+  &:after{
+    left: calc( 100% + #{$base*1.97});
+    transform-origin: 0% 50%;
+    transform: skewy(-$angle);
+    background: darken($main, 10%);
+  }
+  &:before{
+    right: calc( 100% + #{$base*1.97});
+    transform-origin: 100% 0;
+    transform: skewy($angle);
+    background: lighten($main, 10%);
+  }
+}
+
+.machine-back{
+  @include center;
+  background: transparent;
+  width: $width;
+  height: $height;
+  background: linear-gradient(-30deg, darken($main, 30%), darken($main, 10%));
+  
+  &:before, &:after{
+    content: '';
+    position: absolute;
+    display: block;
+    width: $depth;
+    height: $height;
+  }
+  &:after{
+    left: 100%;
+    transform-origin: 0% 50%;
+    transform: skewy(-$angle);
+    background: darken($main, 10%);
+  }
+  &:before{
+    right: 100%;
+    transform-origin: 100% 0;
+    transform: skewy($angle);
+    background: lighten($main, 10%);
+  }
+}
+
+.machine-top{
+  @include center;
+  top: calc(50% - #{$height});
+  width: $width;
+  height: $height;
+  &:before, &:after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: $width;
+    height: $height;
+    background: lighten($main, 20%);
+    transform-origin: 50% 100%;
+  }
+  &:before{
+    transform: skewX($inverse) scaleY($scale);
+  }
+  &:after{
+    transform: skewX(-$inverse) scaleY($scale);
+  }
+}
+.shadows{
+  @include center;
+  top: 50%;
+  width: $depth*3/5;
+  height: $height/2;
+  &:before, &:after{
+    content: '';
+    position: absolute;
+    width: $depth;
+    height: $height/2;
+    background: linear-gradient( rgba(black, 0.25), rgba(black, 0.05));
+    @keyframes flash{
+      0%{  background: linear-gradient( rgba(black, 0.25), rgba(black, 0.05));}
+      50%{ background: linear-gradient( rgba(black, 0.25), rgba(black, 0.05));}
+      51%{ background: linear-gradient( rgba(#333333, 0.25), rgba(#111111, 0.05));}
+      52%{ background: linear-gradient( rgba(black, 0.25), rgba(black, 0.05));}
+      53%{ background: linear-gradient( rgba(#333333, 0.25), rgba(#111111, 0.05));}
+      54%{ background: linear-gradient( rgba(black, 0.25), rgba(black, 0.05));}
+      55%{ background: linear-gradient( rgba(#333333, 0.25), rgba(#111111, 0.05));}
+      56%{ background: linear-gradient( rgba(black, 0.25), rgba(black, 0.05));}
+      57%{ background: linear-gradient( rgba(#333333, 0.25), rgba(#111111, 0.05));}
+      58%{ background: linear-gradient( rgba(black, 0.25), rgba(black, 0.05));}
+      59%{ background: linear-gradient( rgba(#333333, 0.25), rgba(#111111, 0.05));}
+      60%{ background: linear-gradient( rgba(black, 0.25), rgba(black, 0.05));}
+      100%{background: linear-gradient( rgba(black, 0.25), rgba(black, 0.05));}
+    }
+    animation: flash $time infinite;
+  }
+  &:before{
+    transform-origin: 100% 50%;
+    right: $width*2/3;
+    bottom: $base;
+    transform: skewY($angle) scalex(#{$scaleX});
+  }
+  &:after{
+    transform-origin: 0% 50%;
+    left: $width*2/3;
+    bottom: $base;
+    transform: skewY(-$angle) scalex(#{$scaleX});
+  }
+}
+
+.conveyor{
+  @include center;
+  transform: translateX(-50%) translatey(-15%);
+  width: 100vw;
+  height: $depth;
+  background: hsl(225,5%,20%);
+  //box-shadow: 0 $height*0.2 $base rgba(0,0,0,0.1);
+  border-bottom: $base solid darken(hsl(225,10%,20%),5%);
+  &:after{
+    content: '';
+    width: 300%;
+    position: absolute;
+    bottom: -$base*3/4;
+    right: 0;
+    border-bottom: $base/2 dashed lighten(hsl(225,5%,20%),15%);
+    @keyframes conveyor{
+    0%{
+      transform: translatex(0vw);
+      animation-timing-function: $ease-out;
+    }
+    25%{
+      transform: translatex(57vw);
+      animation-timing-function: $ease-out;
+    }
+    66%{
+       transform: translatex(57vw);
+      animation-timing-function: $ease-in;
+    }
+    100%{
+      transform: translatex(120vw);
+      animation-timing-function: $ease-in;
+    }
+  } 
+    animation: conveyor $time infinite;
+  }
+}
+
+.gum{
+  @include center;
+  width: $base*3;
+  height: $base*3;
+  border-radius: $base*5;
+  background-image: radial-gradient(farthest-corner at $base*1.5 $base , lighten(adjust-hue($fruit,-20%),5%) 0%, darken(adjust-hue($fruit,30%),10%) 100%);
+  transform: translatex(-50%) translatey(-55%);
+  @keyframes convey{
+    0%{
+      transform: translatex(-60vw) translatey(-55%);
+      animation-timing-function: $ease-out;
+    }
+    33%{
+      transform: translatex(-50%) translatey(-55%);
+      animation-timing-function: $ease-out;
+    }
+    45%{
+      transform: translatex(-50%) translatey(-55%);
+      animation-timing-function: $ease-in;
+    }
+    60%{
+      transform: translatex(-50%) translatey(-65%) scale(1.5);
+      animation-timing-function: $ease-out;
+    }
+    70%{
+      transform: translatex(-50%) translatey(-65%) scale(1.6);
+      animation-timing-function: $ease-in;
+    }
+    100%{
+      transform: translatex(60vw) translatey(-65%)  scale(1.6);
+      animation-timing-function: $ease-in;
+    }
+  }
+  animation: convey $time infinite;
+  &:after{
+    content: '';
+    @include center;  
+    width: $base*3;
+    height: $base*3;
+    border-radius: $base*5;
+    background-image: radial-gradient(farthest-corner at $base*1.5 $base , lighten(adjust-hue($fruit,-20%),5%) 0%, darken(adjust-hue($fruit,30%),10%) 100%);
+    @keyframes change{
+      0%{
+        background-image: radial-gradient(farthest-corner at $base*1.5 $base , lighten(adjust-hue($fruit,-20%),5%) 0%, darken(adjust-hue($fruit,30%),10%) 100%);
+      }
+      45%{
+        background-image: radial-gradient(farthest-corner at $base*1.5 $base , lighten(adjust-hue($fruit,-20%),5%) 0%, darken(adjust-hue($fruit,30%),10%) 100%);
+      }
+      60%{
+        background-image: radial-gradient(farthest-corner at $base*1.5 $base , lighten(adjust-hue($after,30%),5%) 0%, darken(adjust-hue($after,-20%),10%) 100%);
+      }
+      100%{
+        background-image: radial-gradient(farthest-corner at $base*1.5 $base , lighten(adjust-hue($after,30%),5%) 0%, darken(adjust-hue($after,-20%),10%) 100%);
+      }
+    }
+    animation: change $time infinite linear;
+  }
+  &:before{
+    content: '';
+    @include center;
+    width: $base*3;
+    height: $base*3;
+    border-radius: $base*5;
+    background: rgba(0,0,0,0.4);
+    box-shadow: $base/2 $base $base*2 rgba(0,0,0,0.5);
+    transform: translate3d(-45%,-25%,0) scaleY(0.5) scalex(0.9);
+    @keyframes sharpen{
+      0%{
+        box-shadow: $base/2 $base $base*2 rgba(0,0,0,0.5);
+        transform: translate3d(-45%,-25%,0) scaleY(0.5) scalex(0.9);
+      }
+      33%{
+        box-shadow: $base/2 $base/2 $base*2 rgba(0,0,0,0.3);
+        transform: translate3d(-47.5%,-25%,0) scaleY(0.5) scalex(0.9);
+      }
+      36%{
+        box-shadow: 0 $base/3 $base/3 rgba(0,0,0,0.3);
+        transform: translate3d(-50%,-25%,0) scaleY(0.5) scalex(0.9);
+      }
+      60%{
+        box-shadow: 0 $base/2 $base/2 rgba(0,0,0,0.3);
+        transform: translate3d(-47.5%,-25%,0) scaleY(0.5) scalex(0.9);
+      }
+      66%{
+        box-shadow: $base/2 $base $base rgba(0,0,0,0.3);
+        transform: translate3d(-45%,-25%,0) scaleY(0.5) scalex(0.9);
+      }
+      100%{
+        box-shadow: $base/2 $base $base rgba(0,0,0,0.5);
+        transform: translate3d(-45%,-25%,0) scaleY(0.5) scalex(0.9);
+      }  
+    }
+    animation: sharpen $time infinite linear;
+  }
+  
+}
+
+
+
+.sig{
+  position: fixed;
+  bottom: 8px;
+  right: 8px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 100;
+  font-family: sans-serif;
+  color: rgba(0,0,0,0.4);
+  letter-spacing: 2px;
+}
